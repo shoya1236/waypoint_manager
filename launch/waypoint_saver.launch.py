@@ -7,7 +7,7 @@ def generate_launch_description():
     waypoint_saver_config = os.path.join(
         get_package_share_directory('waypoint_manager'),
         'config',
-        'waypoint_saver.yaml'
+        'saver_config.yaml'
     )
 
     return LaunchDescription([
