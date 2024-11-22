@@ -9,12 +9,14 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/config', ['config/waypoint_manager.yaml']),
-        ('share/' + package_name + '/config', ['config/waypoint_saver.yaml']),
-        ('share/' + package_name + '/config', ['config/waypoint_visualizer.yaml']),  
-        ('share/' + package_name + '/config', ['config/waypoint_skipper.yaml']),      
+        ('share/' + package_name + '/config', ['config/manager_config.yaml']),
+        ('share/' + package_name + '/config', ['config/saver_config.yaml']),
+        ('share/' + package_name + '/config', ['config/maker_config.yaml']),
+        ('share/' + package_name + '/config', ['config/visualizer_config.yaml']),  
+        ('share/' + package_name + '/config', ['config/skipper_config.yaml']),      
         ('share/' + package_name + '/launch', ['launch/waypoint_manager.launch.py']),
         ('share/' + package_name + '/launch', ['launch/waypoint_saver.launch.py']),
+        ('share/' + package_name + '/launch', ['launch/waypoint_maker.launch.py']),
         ('share/' + package_name + '/launch', ['launch/waypoint_visualizer.launch.py']),
         ('share/' + package_name + '/launch', ['launch/waypoint_skipper.launch.py']),      
     ],
@@ -29,6 +31,7 @@ setup(
         'console_scripts': [
             'waypoint_manager = waypoint_manager.waypoint_manager:main',
             'waypoint_saver = waypoint_manager.waypoint_saver:main',
+            'waypoint_maker = waypoint_manager.waypoint_maker:main',
             'waypoint_visualizer = waypoint_manager.waypoint_visualizer:main',
             'waypoint_skipper = waypoint_manager.waypoint_skipper:main'
         ],
