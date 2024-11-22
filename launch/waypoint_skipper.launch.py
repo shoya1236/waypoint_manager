@@ -7,7 +7,7 @@ def generate_launch_description():
     waypoint_skipper_config = os.path.join(
         get_package_share_directory('waypoint_manager'),
         'config',
-        'waypoint_skipper.yaml'
+        'skipper_config.yaml'
     )
 
     return LaunchDescription([
