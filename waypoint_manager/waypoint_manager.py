@@ -1,5 +1,6 @@
 import csv
 import rclpy
+import time
 from rclpy.node import Node
 from rclpy.action import ActionClient
 from action_msgs.msg import GoalStatus
@@ -50,7 +51,7 @@ class WaypointManager(Node):
                 header = next(reader)
 
                 for row in reader:
-                    if len(row) < 9:
+                    if len(row) < 10:
                         self.get_logger().error(f"Row in CSV file is too short: {row}")
                         continue
                     pose_stamped_msg = PoseStamped()
@@ -64,7 +65,8 @@ class WaypointManager(Node):
                     pose_stamped_msg.pose.orientation.w = float(row[7])
 
                     waypoint_data = {"pose": pose_stamped_msg,
-                                     "skip_flag": int(row[8])
+                                     "skip_flag": int(row[8]),
+                                     "mc_flag": int(row[9])
                                      }
                     waypoints_data.append(waypoint_data)
             
@@ -125,6 +127,14 @@ class WaypointManager(Node):
     def advance_to_next_waypoint(self):
         if self.current_waypoint_index < len(self.waypoints_data):
             next_waypoint_data = self.waypoints_data[self.current_waypoint_index]
+
+            #Check the mc_flag
+            mc_flag = next_waypoint_data.get("mc_flag", 0)
+            if next_waypoint_data["mc_flag"] > 0:
+                self.get_logger().info(f"mc_flag is set to {mc_flag}. Waiting for {mc_flag} seconds...")
+                time.sleep(mc_flag)
+                self.get_logger().info(f"{mc_flag} seconds passed. Proceeding to the next waypoint...")
+
             next_waypoint_data["pose"].header.stamp = self.get_clock().now().to_msg()
             self.send_goal(next_waypoint_data)
         else:
