@@ -13,6 +13,8 @@ A package for waypoint navigation using Nav2, enabling robots to autonomously fo
 
 - Waypoint Skip Function
 
+- Event Flag Function
+
 ## 2. Usage Guide
 
 ### 2.1 Clone the Repository
