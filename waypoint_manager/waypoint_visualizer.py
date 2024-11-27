@@ -30,7 +30,7 @@ class WaypointVisualizer(Node):
         self.text_marker_pub = self.create_publisher(MarkerArray, 'waypoint/text_markers', 10)
         self.line_marker_pub = self.create_publisher(MarkerArray, 'waypoint/line_markers', 10)
 
-        self.waypoint_id_sub = self.create_subscription(Int32, '/waypoint_id', self.waypoint_id_callback, 10)
+        self.waypoint_id_sub = self.create_subscription(Int32, 'next_waypoint_id', self.waypoint_id_callback, 10)
 
         self.timer = self.create_timer(0.1, self.timer_callback)
         self.current_waypoint_id = None

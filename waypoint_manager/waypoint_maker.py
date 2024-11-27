@@ -21,7 +21,7 @@ class WaypointMaker(Node):
         self.saving_waypoints_file_name = self.get_parameter('saving_waypoints_file_name').value
 
         # Subscription
-        self.create_subscription(PoseWithCovarianceStamped, '/current_pose', self.save_pose_callback, 10)
+        self.create_subscription(PoseWithCovarianceStamped, 'current_pose', self.save_pose_callback, 10)
 
         # Publisher
         self.pose_publisher = self.create_publisher(PoseStamped, '/navigation_manager/waypoint_pose', 10)

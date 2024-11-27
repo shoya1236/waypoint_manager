@@ -23,12 +23,12 @@ class WaypointSkipper(Node):
         self.current_pose = None
         self.current_waypoint_id = None
         self.skip_scan_counter = 0
-        self.create_subscription(PoseWithCovarianceStamped, '/current_pose', self.current_pose_callback, 10)
-        self.create_subscription(Int32, '/waypoint_id', self.waypoint_id_callback, 10)
-        self.create_subscription(LaserScan, '/scan', self.scan_callback, 10)
+        self.create_subscription(PoseWithCovarianceStamped, 'current_pose', self.current_pose_callback, 10)
+        self.create_subscription(Int32, 'next_waypoint_id', self.waypoint_id_callback, 10)
+        self.create_subscription(LaserScan, 'scan', self.scan_callback, 10)
 
         # Publisher
-        self.skip_flag_publisher = self.create_publisher(Bool, '/skip_flag', 10)
+        self.skip_flag_publisher = self.create_publisher(Bool, 'skip_flag', 10)
         self.marker_array_publisher = self.create_publisher(MarkerArray, 'waypoint/skip_tolerance', 10)
 
         # Load Waypoint CSV file
