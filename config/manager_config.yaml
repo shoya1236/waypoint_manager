@@ -2,7 +2,6 @@ waypoint_manager_node:
   ros__parameters:
     # Set waypoints_csv file in the launch file
     waypoints_csv: ''
-    action_server_name: 'navigate_to_pose'
     loop_enable: True
     loop_count: 5
 
@@ -16,5 +15,5 @@ waypoint_skipper_node:
   ros__parameters:
     # Set waypoints_csv file in the launch file
     waypoints_csv: ''
-    waypoint_skip_tolerance: 3.0
+    waypoint_skip_tolerance: 1.0
     skip_scan_count: 5
