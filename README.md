@@ -54,7 +54,6 @@ You can configure the node's parameters by modifying the `waypoint_manager/waypo
     ros__parameters:
       # Set waypoints_csv file in the launch file
       waypoints_csv: ''
-      action_server_name: 'navigate_to_pose'
       loop_enable: True
       loop_count: 2
   
