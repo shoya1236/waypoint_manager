@@ -26,6 +26,7 @@ class WaypointManager(Node):
         # Publishers
         self.next_waypoint_id_pub = self.create_publisher(Int32, 'next_waypoint_id', 10)
         self.reached_waypoint_id_pub = self.create_publisher(Int32, 'reached_waypoint_id', 10)
+        self.speak_text_id_pub = self.create_publisher(Int32, 'speak_text_id', 10)
 
         # Action client for navigation
         self._action_client = ActionClient(self, NavigateToPose, 'navigate_to_pose')
@@ -35,6 +36,8 @@ class WaypointManager(Node):
         if not self.waypoints_data:
             self.get_logger().error("No waypoints loaded. Please check the CSV file.")
             return
+        
+        self.speak_text_id_pub.publish(Int32(data=0))
 
         # Variables to manage waypoints and navigation
         self.current_waypoint_index = 0
@@ -138,6 +141,7 @@ class WaypointManager(Node):
             # Publish the reached waypoint ID
             reached_waypoint_id = self.current_waypoint_index
             self.reached_waypoint_id_pub.publish(Int32(data=reached_waypoint_id))
+            self.speak_text_id_pub.publish(Int32(data=1))
 
             current_waypoint_data = self.waypoints_data[self.current_waypoint_index]
 
@@ -172,6 +176,7 @@ class WaypointManager(Node):
             self.skip_flag = False
             self.current_waypoint_index += 1
             self.advance_to_next_waypoint()
+            self.speak_text_id_pub.publish(Int32(data=2))
         else:
             # Handle other statuses
             self.get_logger().warn(f'Goal failed with status code: {status}. Not advancing to next waypoint.')
