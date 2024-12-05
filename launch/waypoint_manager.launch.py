@@ -16,24 +16,7 @@ def generate_launch_description():
         'manager_config.yaml'
     )
 
-    # Path to the voice_manager launch file
-    voice_manager_launch_path = os.path.join(
-        get_package_share_directory('voice_manager'),
-        'launch',
-        'voice_manager.launch.py'
-    )
-
-    # Declare the argument for enabling voice_manager
-    voice_manager_arg = DeclareLaunchArgument(
-        'enable_voice_manager',
-        default_value='false',
-        description='Whether to launch the voice_manager package'
-    )
-
     return LaunchDescription([
-        # Argument declaration
-        voice_manager_arg,
-
         # Waypoint manager node
         Node(
             package='waypoint_manager',
@@ -68,12 +51,4 @@ def generate_launch_description():
                 'waypoints_csv': waypoints_csv_path,
             }]
         ),
-
-        # Conditional launch of voice_manager
-        GroupAction([
-            IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(voice_manager_launch_path),
-                condition=IfCondition(LaunchConfiguration('enable_voice_manager'))
-            )
-        ]),
     ])
