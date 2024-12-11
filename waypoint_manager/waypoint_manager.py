@@ -26,6 +26,7 @@ class WaypointManager(Node):
         # Publishers
         self.next_waypoint_id_pub = self.create_publisher(Int32, 'next_waypoint_id', 10)
         self.reached_waypoint_id_pub = self.create_publisher(Int32, 'reached_waypoint_id', 10)
+        self.speak_text_id_pub = self.create_publisher(Int32, 'text_id', 10)
 
         # Action client for navigation
         self._action_client = ActionClient(self, NavigateToPose, 'navigate_to_pose')
@@ -136,10 +137,13 @@ class WaypointManager(Node):
             self.get_logger().info(f'Waypoint {self.current_waypoint_index} reached successfully.')
             self.skip_flag = False
             self.retry_count = 0
-            
+
             # Publish the reached waypoint ID
             reached_waypoint_id = self.current_waypoint_index
             self.reached_waypoint_id_pub.publish(Int32(data=reached_waypoint_id))
+
+
+            self.speak_text_id_pub.publish(Int32(data=self.current_waypoint_index))
 
             current_waypoint_data = self.waypoints_data[self.current_waypoint_index]
 
