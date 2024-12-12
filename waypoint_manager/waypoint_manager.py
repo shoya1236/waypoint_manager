@@ -140,7 +140,8 @@ class WaypointManager(Node):
 
             # Publish the reached waypoint ID
             reached_waypoint_id = self.current_waypoint_index
-            self.reached_waypoint_id_pub.publish(Int32(data=reached_waypoint_id))
+            #喋らせたいテキストIDを入力
+            self.reached_waypoint_id_pub.publish(Int32(data=0))
 
 
             self.speak_text_id_pub.publish(Int32(data=self.current_waypoint_index))
