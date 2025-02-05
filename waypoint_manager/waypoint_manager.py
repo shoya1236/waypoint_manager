@@ -32,6 +32,7 @@ class WaypointManager(Node):
         self._action_client = ActionClient(self, NavigateToPose, 'navigate_to_pose')
 
         # Load waypoints from CSV file
+        self.waypoints_data = []
         self.waypoints_data = self.load_waypoints_from_csv(waypoints_csv)
         if not self.waypoints_data:
             self.get_logger().error("No waypoints loaded. Please check the CSV file.")
@@ -70,7 +71,7 @@ class WaypointManager(Node):
                     "skip_flag": int(row[8]),
                     "event_flag": int(row[9])
                 }
-                
+
                 waypoints_data.append(waypoint_data)
 
         return waypoints_data
@@ -140,7 +141,7 @@ class WaypointManager(Node):
 
             # Publish the reached waypoint ID
             reached_waypoint_id = self.current_waypoint_index
-            #喋らせたいテキストIDを入力
+
             self.reached_waypoint_id_pub.publish(Int32(data=reached_waypoint_id))
 
 
