@@ -7,6 +7,10 @@
   <maintainer email="kazulab10969@outlook.jp">kazuma yagi</maintainer>
   <license>MIT</license>
 
+　<depend>rclpy</depend>
+  <depend>rosidl_default_generators</depend>
+  <depend>rosidl_default_runtime</depend>
+
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>
